@@ -134,5 +134,84 @@ def single_bit_xor(bit0, bit1) :
     second = int(bit1)
     return str((first ^ second))
 
+def getBytes(message):
+    length = len(message) / 2
+    ret = []
+    i = 0
+
+    while i < length :
+        ret.append(message[i*2 : i*2 + 2])
+        i+=1
+
+    return (ret)
+
+def xorBytes(onexor, bytesArray) :
+    ret = []
+    e = 0
+    for e in bytesArray :
+        ret.append(hex_xor(e, onexor))
+    return (ret);
+
+def getOccurenceChar(char, bytesArray) :
+    c = 0
+    for i in bytesArray :
+        if char == i :
+            c = c + 1
+    return (c);
+
+def isEnglish(bytesArray) :
+    E = getOccurenceChar("45", bytesArray)
+    T = getOccurenceChar("54", bytesArray)
+    A = getOccurenceChar("41", bytesArray)
+    O = getOccurenceChar("4F", bytesArray)
+    I = getOccurenceChar("49", bytesArray)
+    N = getOccurenceChar("4E", bytesArray)
+
+    S = getOccurenceChar("53", bytesArray)
+    H = getOccurenceChar("48", bytesArray)
+    R = getOccurenceChar("52", bytesArray)
+    D = getOccurenceChar("44", bytesArray)
+    L = getOccurenceChar("4C", bytesArray)
+    U = getOccurenceChar("55", bytesArray)
+
+    B = getOccurenceChar("42", bytesArray)
+    V = getOccurenceChar("56", bytesArray)
+    K = getOccurenceChar("4B", bytesArray)
+    J = getOccurenceChar("4A", bytesArray)
+    X = getOccurenceChar("58", bytesArray)
+    Q = getOccurenceChar("51", bytesArray)
+    Z = getOccurenceChar("5A", bytesArray)
+    return (E + T + A + O - J - X - Q - Z) #+ O + I + N + S + H + R + D + L + U - B - V - K - J - X - Q - Z)
+
+def getxor(onexor, message) :
+    ret = [];
+    array = getBytes(message)
+    ret = xorBytes(onexor, message)
+    return (ret)
+
+def getIndex(array) :
+    old = 0
+    i = 0
+    index = 0
+    indexs = []
+    for e in array :
+        if old < e :
+            old = e
+            indexs.append(i)
+            index = i
+        i = i + 1
+    return (indexs[int(len(indexs) / 2)])
+
+def bruteforcecaesarkey(message):
+    i = 0
+
+    keys = []
+    while i < 256 :
+        xor = getxor(convert_to_base(i, "0123456789ABCDEF"), message)
+        keys.append(isEnglish(xor))
+        i = i + 1;
+    print(getIndex(keys))
+
 if __name__ == '__main__' :
     print(hex_xor("5374616C6C6D616E","426C61636B486174"))
+    bruteforcecaesarkey("0430272762112D243635233027786204302727262D2F62232C2662012D2D32273023362B2D2C")
