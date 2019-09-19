@@ -50,7 +50,7 @@ def convert_to_dec(num : str, base : str) :
 
 def convert_to_bin(num : str, base : str) :
     return convert_base(num, base, "01")
-²
+
 def convert_hex_to_base64(num : str) :
     return convert_to_base64(num, "0123456789ABCDEF")
 
@@ -68,6 +68,25 @@ def convert_dec_to_hex(num : str) :
 
 def convert_bin_to_hex(num : str) :
     return convert_to_hex(num, "01")
+
+def convert_base64_to_dec(num : str) :
+    return convert_to_dec(num, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
+
+def convert_hex_to_dec(num : str) :
+    return convert_to_dec(num, "0123456789ABCDEF")
+
+def convert_bin_to_dec(num : str) :
+    return convert_to_dec(num, "01")
+
+def convert_base64_to_bin(num : str) :
+    return convert_to_bin(num, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
+
+def convert_hex_to_bin(num : str) :
+    return convert_to_bin(num, "0123456789ABCDEF")
+
+def convert_dec_to_bin(num : str) :
+    return convert_to_bin(num, "0123456789")
+
 
 if __name__ == '__main__' :
     print(convert_base("F150A", "0123456789ABCDEF", "0123456789ABCDEF"))
