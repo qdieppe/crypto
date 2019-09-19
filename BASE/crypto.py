@@ -19,16 +19,13 @@ def convert_to_base(nb : int, base : str) :
 
     if (nb == 0) :
         return (ret);
-    print(nb)
     extract = nb % baselen
     presave = nb
     nb = nb - (extract)
     save = nb
-    nb = int(nb) / int(baselen)
-    print(presave, '-', extract,'=',save)
-    print(save, '/', baselen,'=',nb)
+    nb = int(nb) // int(baselen)
     char = str(get_base_char(extract, base))
-    return (str(convert_to_base(int(nb), base)))
+    return (str(convert_to_base(int(nb), base)) + char)
 
 def convert_to_number(num : str, base : str) :
     baselen = len(base)
@@ -44,10 +41,7 @@ def convert_to_number(num : str, base : str) :
 
 def convert_base(num : str, base : str, base2 : str) :
     nb = convert_to_number(num, base)
-    print('nb :', nb)
-    ret = convert_to_base(nb, base2)
-    print('ret : ', ret)
-    return (ret)
+    return (convert_to_base(nb, base2));
 
 def convert_to_base64(num : str, base : str) :
     return convert_base(num, base, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
@@ -130,12 +124,9 @@ def bin_xor(num_bin : str, num_bin2 : str) :
     return (''.join(ret))
 
 def hex_xor(num0 : str, num1 : str) :
-    #binary = bin_xor(convert_hex_to_bin(num0), convert_hex_to_bin(num1))
-    #print(binary)
     nb = convert_to_number(num0, "0123456789ABCDEF")
     nb2 = convert_to_number(num1, "0123456789ABCDEF")
     xor = nb ^ nb2
-    print(xor, nb, nb2)
     return convert_to_base(xor, "0123456789ABCDEF")
 
 def single_bit_xor(bit0, bit1) :
@@ -144,5 +135,4 @@ def single_bit_xor(bit0, bit1) :
     return str((first ^ second))
 
 if __name__ == '__main__' :
-    #print(bin_xor("001001000", "1111000011"))
     print(hex_xor("5374616C6C6D616E","426C61636B486174"))
