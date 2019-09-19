@@ -24,7 +24,7 @@ def convert_to_base(nb : int, base : str) :
     presave = nb
     nb = nb - (extract)
     save = nb
-    nb = int(nb / baselen)
+    nb = int(nb) / int(baselen)
     print(presave, '-', extract,'=',save)
     print(save, '/', baselen,'=',nb)
     char = str(get_base_char(extract, base))
